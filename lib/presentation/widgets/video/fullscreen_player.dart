@@ -43,13 +43,22 @@ class _FullscreenPlayerState extends State<FullscreenPlayer> {
           );
         }
 
-        return AspectRatio(
-          aspectRatio: controller.value.aspectRatio,
-          child: Stack(
-            children: [
-              VideoPlayer(controller),
-              Positioned(child: _VideoCaption(caption: widget.caption)),
-            ],
+        return GestureDetector(
+          onTap: () {
+            if(controller.value.isPlaying) {
+              controller.pause();
+            } else {
+              controller.play();
+            }
+          },
+          child: AspectRatio(
+            aspectRatio: controller.value.aspectRatio,
+            child: Stack(
+              children: [
+                VideoPlayer(controller),
+                Positioned(child: _VideoCaption(caption: widget.caption)),
+              ],
+            ),
           ),
         );
       },
